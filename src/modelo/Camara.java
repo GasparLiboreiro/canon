@@ -3,6 +3,8 @@ package modelo;
 public class Camara {
 	private Vector3  pos,  inc;
 	
+	private double t=0;
+	
 	public Camara(Vector3 pos, Vector3 inc) {
 		this.pos=pos;
 		this.inc=inc;
@@ -24,5 +26,14 @@ public class Camara {
 	public Vector3 getInc() {
 		return inc;
 	}
-
+	
+	public void update(double dt) {
+		
+		t+=dt;
+		inc.y=-t/2+0.5;
+		pos.x=Math.cos((t/2)*Math.PI)*7;
+		pos.z=Math.sin((t/2)*Math.PI)*7;
+		
+	}
+	
 }

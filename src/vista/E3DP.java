@@ -23,7 +23,7 @@ public class E3DP extends JPanel{
 	
 	public E3DP() {
 		//inicio parametros de renderizado
-		Renderer.setAlfa(120*(Math.PI/180));
+		Renderer.setAlfa(80*(Math.PI/180));
 		Renderer.setN(0.5);
 		Renderer.setF(10);
 		
@@ -36,12 +36,18 @@ public class E3DP extends JPanel{
 	}
 	
 	private void escena1() {
-		Entity entidadCamara = new Entity(ModeloFactory.sinModelo(), new Vector3(0,0,6), new Vector3(0,0,0));
-		camara=new Camara(entidadCamara.pos, entidadCamara.inc);
-		
-		escena.add(entidadCamara);
-		
+		camara=new Camara(new Vector3(0,0,6), new Vector3(0,0,0));
 
+		escena.add(new Entity(ModeloFactory.cubo(1), new Vector3(0,0,2)));
+		escena.add(new Entity(ModeloFactory.cubo(1), new Vector3(0,0,-2)));
+		
+		escena.get(0).vpos.y=10;
+		escena.get(1).vpos.y=10;
+		escena.get(0).vinc.y=2;
+		escena.get(1).vinc.x=2;
+		escena.get(0).apos.y=-9.81;
+		escena.get(1).apos.y=-9.81;
+		
 		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(0, 0, 0), new Vector3(0, 0,0)));
 		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(0, 3, 0), new Vector3(0, 0,0)));
 		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(0, -3, 0), new Vector3(0, 0,0)));
@@ -51,15 +57,23 @@ public class E3DP extends JPanel{
 		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(3, -3, 0), new Vector3(0.25, 0,0)));
 		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(-3, 3, 0), new Vector3(0.25, 0,0)));
 		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(-3, -3, 0), new Vector3(0.25, 0,0)));
-		entidadCamara.apos.x=1;
-		entidadCamara.apos.y=1;
-		entidadCamara.apos.z=-1;
-		entidadCamara.ainc.z=0.0625*2;
-		entidadCamara.ainc.y=0.0625*4;
-		entidadCamara.ainc.x=0.125*2;
+		
+		
+		
 	}
-	
+
+	private void escena2() {
+		camara=new Camara(new Vector3(0,0,3), new Vector3(0,0,0));
+
+		escena.add(new Entity(ModeloFactory.cubo(2), new Vector3(0,0,0)));
+		escena.get(0).vinc.sumar(0.25,0.125,0.5);
+		
+		
+		
+	}
 	protected Void update(double dt) {
+		camara.update(dt);
+		
 		for(int x=0; x<escena.size(); x++) {
 			Entity e = escena.get(x);
 			e.pos.sumar(e.vpos.x*dt, e.vpos.y*dt, e.vpos.z*dt);

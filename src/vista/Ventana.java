@@ -31,6 +31,7 @@ public class Ventana extends JFrame implements KeyListener{
 	
 	public Ventana() {
 		this.setBounds(100, 100, 500, 500);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.addKeyListener(this);
@@ -42,7 +43,6 @@ public class Ventana extends JFrame implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		instance.repaint();
 	}
 
 

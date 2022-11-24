@@ -6,7 +6,7 @@ import java.util.function.Function;
 import javax.swing.JPanel;
 
 public class GameLoop extends Thread{
-    private static final double MAX_UPS = 200;
+    private static final double MAX_UPS = 1000;
     private static final double UPS_DELAY = 1000/MAX_UPS;
     public boolean isRunning = false;
     private Function<Void, Void> repaint;
